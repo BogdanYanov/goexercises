@@ -10,9 +10,10 @@ import (
 
 func main() {
 	var (
-		n, res uint64
-		x, y, i uint64 = 1, 1, 3
-		reader = bufio.NewReader(os.Stdin)
+		i         uint64 = 3
+		n, res    uint64
+		cur, prev uint64 = 1, 1
+		reader           = bufio.NewReader(os.Stdin)
 	)
 
 	fmt.Println("====== Fibonacci ======")
@@ -40,12 +41,11 @@ Loop:
 		goto Result
 	}
 
-	res = x + y
-	x, y = res, x
+	res = cur + prev
+	cur, prev = res, cur
 	i++
 	goto Loop
 
 Result:
-		fmt.Println("Result ->", res)
-		return
+	fmt.Println("Result ->", res)
 }
