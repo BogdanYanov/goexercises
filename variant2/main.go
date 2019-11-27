@@ -11,16 +11,17 @@ import (
 func main() {
 	var (
 		n, res uint64
-		x, y uint64 = 1, 1
+		x, y, i uint64 = 1, 1, 3
 		reader = bufio.NewReader(os.Stdin)
 	)
 
 	fmt.Println("====== Fibonacci ======")
 	fmt.Print("n -> ")
+
 	text, _ := reader.ReadString('\n')
 	n, err := strconv.ParseUint(strings.TrimSuffix(text, "\n"), 10, 64)
 	if err != nil {
-		fmt.Errorf("can`t use this number")
+		fmt.Println(fmt.Errorf("can`t use this number"))
 		return
 	}
 
@@ -34,11 +35,15 @@ func main() {
 		goto Result
 	}
 
-
-	for i := uint64(3); i <= n; i++ {
-		res = x + y
-		x, y = res, x
+Loop:
+	if i > n {
+		goto Result
 	}
+
+	res = x + y
+	x, y = res, x
+	i++
+	goto Loop
 
 Result:
 		fmt.Println("Result ->", res)
